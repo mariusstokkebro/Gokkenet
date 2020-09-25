@@ -16,14 +16,14 @@
 
     </properties>
 
-    <dependency>
-        <groupId>net.sf.ucanaccess</groupId>
-        <artifactId>ucanaccess</artifactId>
-        <version>4.0.4</version>
-    </dependency>
+
 
     <dependencies>
-
+        <dependency>
+            <groupId>net.sf.ucanaccess</groupId>
+            <artifactId>ucanaccess</artifactId>
+            <version>4.0.4</version>
+        </dependency>
         <dependency>
 
             <groupId>org.processing</groupId>
