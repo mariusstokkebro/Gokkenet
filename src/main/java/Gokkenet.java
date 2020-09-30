@@ -8,25 +8,20 @@ public class Gokkenet extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("Gokkenet");
-
-
-    }
-
-
-
-
+        }
 
     @Override
     public void setup() {
         String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
+
         try {
             Connection connection = DriverManager.getConnection(databaseURL);
             println("connected to MS Access database. ");
             Statement s = connection.createStatement();
             ResultSet rs = s.executeQuery("SELECT [Brugernavn] FROM [Users]");
             ResultSet rp = s.executeQuery("SELECT [Kodeord] FROM [Users]");
-
             while (rs.next()) {
+                
                 System.out.println(rs.getString(1));
                 rp.next();
 
@@ -38,11 +33,6 @@ public class Gokkenet extends PApplet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    @Override
-    public void draw() {
-
-    }
 }

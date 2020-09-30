@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="BezierSQLib">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/library/library/BezierSQLib.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/library/library/mysql-connector-java-3.1.14-bin.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/library/library/postgresql-9.2-1002.jdbc3.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/library/library/sqlite-jdbc-3.7.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/library/library/sqlite-jdbc-3.7.2.jar!/" />
+    </SOURCES>
+  </library>
+</component>
