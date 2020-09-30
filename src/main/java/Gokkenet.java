@@ -11,6 +11,8 @@ public class Gokkenet extends PApplet {
     }
 
     LoginSide ls;
+    String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
+    boolean k;
 
     @Override
     public void settings() {
@@ -25,9 +27,12 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void draw() {
+        if(ls.visible == true){
+
+        }
         ls.drawSide();
 
-        String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
+
         try {
             Connection connection = DriverManager.getConnection(databaseURL);
             println("connected to MS Access database. ");
@@ -41,9 +46,11 @@ public class Gokkenet extends PApplet {
 
                 System.out.println(rp.getString(1));
                 System.out.println("");
-                if(ls.userName.indput.equals(rs.getString(1) && ls.password.indput.equals(rp.getString(1))){
-                    println("fuck");
-                    ls.visible = false;
+                if(ls.userName.indput.equals(rs.getString(1))){
+                    if(ls.password.indput.equals(rp.getString(1))){
+
+
+                    }
                 }
 
             }
@@ -56,7 +63,10 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void keyTyped() {
-        ls.typede(key);
+        if(ls.visible = true){
+            ls.typede(key);
+        }
+
     }
 
     @Override
