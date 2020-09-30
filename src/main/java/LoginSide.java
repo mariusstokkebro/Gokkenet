@@ -24,7 +24,21 @@ public class LoginSide {
       }
     }
 
-    void drawSide(){
+    void drawSide() {
+
+            password.tegnTextFlet();
+            userName.tegnTextFlet();
+    }
+
+    void typede(char key) {
+            password.keyindput(key);
+            userName.keyindput(key);
 
     }
+
+    void clik(float mx, float my){
+        password.KlikTjek(mx,my);
+        userName.KlikTjek(mx,my);
+    }
+}
 }
