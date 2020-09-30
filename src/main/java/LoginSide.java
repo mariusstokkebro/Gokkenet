@@ -1,34 +1,30 @@
 import processing.core.PApplet;
 
+import java.awt.event.KeyEvent;
+import java.security.Key;
+
 public class LoginSide {
-    PApplet p;
-    TextFlet password;
-    TextFlet userName;
-    boolean visible = true;
+ PApplet p;
+ TextFlet password;
+ TextFlet userName;
+ int id = 1;
 
-    LoginSide(PApplet p) {
-        this.p = p;
-        password = new TextFlet(p, p.width / 2, p.height / 2, 200, 50, "Password");
-        userName = new TextFlet(p, p.width / 2, p.height / 2 - 60, 200, 50, "userName");
+    LoginSide(PApplet p){
+
+      this.p = p;
+      password = new TextFlet(p,p.width/2,p.height/2, 200, 50, "Fuck");
+
+
+      if (p.keyPressed && p.keyCode == p.ENTER){
+          /*    ok mangler kun at lave så den har et variabel til databasen.
+          INSERT INTO Customers (Id, Brugernavn, Kodeord)
+          VALUES (id, userName.indput, password.indput);
+          */
+          id++;
+      }
     }
 
-    void drawSide() {
-        if (visible) {
-            password.tegnTextFlet();
-            userName.tegnTextFlet();
-        }
-    }
+    void drawSide(){
 
-
-    void typede(char key) {
-        if (visible) {
-            password.keyindput(key);
-            userName.keyindput(key);
-        }
-    }
-
-    void clik(float mx, float my){
-        password.KlikTjek(mx,my);
-        userName.KlikTjek(mx,my);
     }
 }
