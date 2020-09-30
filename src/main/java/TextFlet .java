@@ -9,7 +9,7 @@ class TextFlet {
     String indput = ""; //dit navn består af en masse bogstaver <3
 
     boolean klikket = false;
-
+    boolean acceptLetters = true;
 
     PApplet p;
 
@@ -20,7 +20,6 @@ class TextFlet {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.textFletNavn = text;
-
     }
 
     void KlikTjek(float mouseX, float mouseY) {
@@ -31,31 +30,47 @@ class TextFlet {
                 mouseY > positionY &&
                 mouseY < positionY + sizeY) {
             klikket = !klikket;
+        } else {
+            klikket = false;
         }
-    }
 
+
+    }
 
     void tegnTextFlet() {
         p.stroke(1, 46, 74, 100);
-        p.fill(227, 225, 252, 250);
-        p.rect(positionX, positionY, sizeX, sizeY);
-        p.fill(0);
-        p.text(indput, positionX +(sizeX/16), positionY + (sizeY/2));
+        if(klikket){
+            p.fill(227, 225, 252, 250);
+        } else {
+            p.fill(200);
+        }
 
+
+        p.rect(positionX, positionY, sizeX, sizeY);
+
+        p.fill(0);
+        p.textSize(16);
+        p.text(indput, positionX +(sizeX/16), positionY + (sizeY/2));
+        p.text(textFletNavn,positionX, positionY);
     }
 
-    void keyindput(char key){
+    void setAcceptLetter(boolean accept) {
+        acceptLetters = accept;
+    }
 
-        if(klikket){
-            if(key == p.BACKSPACE){
+    void keyindput(char key) {
+
+        if(klikket ){
+            if(key == p.BACKSPACE && indput.length() > 0){
 
                 indput =indput.substring(0,indput.length()-1);
-            } else{
-                indput = indput + key;
+            } else {
+                if ((!acceptLetters && key >= '0' && key <= '9') || acceptLetters)
+                    indput = indput + key;
             }
 
         }
-        p.println(indput);
+
     }
 
 
