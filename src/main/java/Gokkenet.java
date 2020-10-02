@@ -46,8 +46,8 @@ public class Gokkenet extends PApplet {
                 System.out.println(rp.getString(1));
                 System.out.println("");
                 if(ls.userName.indput.equals(rs.getString(1))){
-                    if(ls.password.indput.equals(rp.getString(1))){
-
+                    if(ls.password.indput.equals(rp.getString(1)) && ls.btnLogin.klikket == true){
+                        ls.visible = false;
 
                     }
                 }
