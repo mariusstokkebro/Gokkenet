@@ -27,9 +27,8 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void draw() {
-        if(ls.visible == true){
-
-        }
+        clear();
+        background(200);
         ls.drawSide();
 
 
