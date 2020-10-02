@@ -27,10 +27,30 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void draw() {
-        if(ls.visible == true){
+        clear();
+        background(200);
+        connectToDataBAse();
 
+    }
+
+    @Override
+    public void keyTyped() {
+        if(ls.visible = true){
+            ls.typede(key);
         }
-        ls.drawSide();
+
+    }
+
+    @Override
+    public void mouseClicked() {
+        ls.clik(mouseX,mouseY);
+    }
+
+    public void connectToDataBAse(){
+        if(ls.visible == true){
+            ls.drawSide();
+        }
+
 
 
         try {
@@ -48,7 +68,7 @@ public class Gokkenet extends PApplet {
                 System.out.println("");
                 if(ls.userName.indput.equals(rs.getString(1))){
                     if(ls.password.indput.equals(rp.getString(1))){
-
+                        ls.visible = false;
 
                     }
                 }
@@ -59,18 +79,5 @@ public class Gokkenet extends PApplet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void keyTyped() {
-        if(ls.visible = true){
-            ls.typede(key);
-        }
-
-    }
-
-    @Override
-    public void mouseClicked() {
-        ls.clik(mouseX,mouseY);
     }
 }
