@@ -42,7 +42,7 @@ public class Gokkenet extends PApplet {
     @Override
     public void keyTyped() {
 
-            ls.typede(key);
+        ls.typede(key);
 
 
     }
@@ -74,11 +74,10 @@ public class Gokkenet extends PApplet {
     @Override
     public void mouseClicked() {
 
-            ls.clik(mouseX,mouseY);
+        ls.clik(mouseX,mouseY);
 
 
 
 
     }
 }
-
