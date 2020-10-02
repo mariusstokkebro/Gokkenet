@@ -9,7 +9,7 @@ public class Gokkenet extends PApplet {
     public static void main(String[] args) {
         PApplet.main("Gokkenet");
     }
-
+    MessageSide ms;
     LoginSide ls;
     String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
     boolean k = true;
@@ -23,10 +23,12 @@ public class Gokkenet extends PApplet {
     public void setup() {
 
         ls = new LoginSide(this);
+        ms = new MessageSide(this);
     }
 
     @Override
     public void draw() {
+
         clear();
         background(200);
         ls.drawSide();
@@ -48,7 +50,7 @@ public class Gokkenet extends PApplet {
                 if(ls.userName.indput.equals(rs.getString(1))){
                     if(ls.password.indput.equals(rp.getString(1)) && ls.btnLogin.klikket == true){
                         ls.visible = false;
-
+                        ms.drawMessage();
                     }
                 }
 
@@ -64,6 +66,7 @@ public class Gokkenet extends PApplet {
     public void keyTyped() {
         if(ls.visible = true){
             ls.typede(key);
+            ms.writeM(key);
         }
 
     }
@@ -71,5 +74,6 @@ public class Gokkenet extends PApplet {
     @Override
     public void mouseClicked() {
         ls.clik(mouseX,mouseY);
+        ms.click(mouseX,mouseY);
     }
 }

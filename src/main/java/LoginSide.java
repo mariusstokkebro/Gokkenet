@@ -9,10 +9,10 @@ public class LoginSide {
     AlmindeligKnap btnLogin;
     LoginSide(PApplet p) {
         this.p = p;
-        password = new TextFlet(p, p.width / 2, p.height / 2, 200, 50, "Password");
-        userName = new TextFlet(p, p.width / 2, p.height / 2 - 70, 200, 50, "userName");
-        registrer = new AlmindeligKnap(p,250,400,100,50,"registrer");
-        btnLogin  = new AlmindeligKnap(p,p.width / 2, p.height / 2 - 140,100,50,"login");
+        password = new TextFlet(p, p.width / 2-100, p.height / 2, 200, 50, "Password");
+        userName = new TextFlet(p, p.width / 2-100, p.height / 2 - 70, 200, 50, "userName");
+        registrer = new AlmindeligKnap(p,p.width/2,p.height/2 +60,100,50,"registrer");
+        btnLogin  = new AlmindeligKnap(p,p.width / 2-100, p.height / 2 +60,100,50,"login");
     }
 
     void drawSide() {
