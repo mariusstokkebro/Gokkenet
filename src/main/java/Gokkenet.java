@@ -12,7 +12,7 @@ public class Gokkenet extends PApplet {
 
     LoginSide ls;
     String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
-    boolean k;
+    boolean k = true;
 
     @Override
     public void settings() {
@@ -27,12 +27,27 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void draw() {
-        if(ls.visible == true){
-
+        connectToDatabase();
+        clear();
+        background(200);
+        if(k == true){
+            ls.drawSide();
         }
-        ls.drawSide();
 
 
+
+
+    }
+
+    @Override
+    public void keyTyped() {
+
+            ls.typede(key);
+
+
+    }
+
+    public void connectToDatabase(){
         try {
             Connection connection = DriverManager.getConnection(databaseURL);
             println("connected to MS Access database. ");
@@ -41,15 +56,10 @@ public class Gokkenet extends PApplet {
             ResultSet rp = s.executeQuery("SELECT [Kodeord] FROM [Users]");
 
             while (rs.next()) {
-                System.out.println(rs.getString(1));
                 rp.next();
-
-                System.out.println(rp.getString(1));
-                System.out.println("");
                 if(ls.userName.indput.equals(rs.getString(1))){
                     if(ls.password.indput.equals(rp.getString(1))){
-
-
+                        k = false;
                     }
                 }
 
@@ -62,15 +72,13 @@ public class Gokkenet extends PApplet {
     }
 
     @Override
-    public void keyTyped() {
-        if(ls.visible = true){
-            ls.typede(key);
-        }
-
-    }
-
-    @Override
     public void mouseClicked() {
-        ls.clik(mouseX,mouseY);
+
+            ls.clik(mouseX,mouseY);
+
+
+
+
     }
 }
+
