@@ -40,4 +40,6 @@ public class LoginSide {
         }
         registrer.registrerKlik(p.mouseX,p.mouseY);
     }
+
+    ///
 }
