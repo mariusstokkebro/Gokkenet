@@ -37,9 +37,9 @@ public abstract class Knap {
     }
 
     void tegnKnap() {
-        p.stroke(1, 46, 74, 100);
+        p.stroke(1, 46, 74);
         p.noFill();
-
+        p.fill(200);
         p.rect(positionX, positionY, sizeX, sizeY);
         setTekst(text);
     }

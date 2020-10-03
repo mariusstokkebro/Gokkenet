@@ -40,18 +40,18 @@ public class LoginSide {
         if (visible) {
             password.KlikTjek(mx, my);
             userName.KlikTjek(mx, my);
+            if(registrer.erKlikket()){
 
+                registrer.registrerRelease();
+                btnLogin.registrerRelease();
+            } registrer.registrerKlik(p.mouseX,p.mouseY);
+            btnLogin.registrerKlik(p.mouseX,p.mouseY);
         }else{
             userName.klikket = false;
-            password.klikket= !password.klikket;
+            password.klikket= false;
         }
-        if(registrer.erKlikket()){
-            visible = false;
-            registrer.registrerRelease();
-            btnLogin.registrerRelease();
-        }
-        registrer.registrerKlik(p.mouseX,p.mouseY);
-        btnLogin.registrerKlik(p.mouseX,p.mouseY);
+
+
     }
 
     ///
