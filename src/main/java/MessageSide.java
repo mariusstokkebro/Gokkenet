@@ -64,15 +64,17 @@ public class MessageSide {
                     "WHERE threadId = " + threadId + " ORDER BY message.timestamp");
             int i = 0;
             while (rsMessages.next()) {
+                p.text(rsMessages.getString(3) + ": ", p.width / 2, y - 20 +  200);
+                p.text(rsMessages.getString(1), p.width / 2, y +200);
+                p.text(rsMessages.getString(2), p.width / 2, y + 20 +200);
 
 
-                p.text(rsMessages.getString(3) + ": ", p.width / 2, y - 20 + i * 80);
-                p.text(rsMessages.getString(1), p.width / 2, y + i * 80);
-                p.text(rsMessages.getString(2), p.width / 2, y + 20 + i * 80);
+
+                p.println(i);
                 i++;
 
-
             }
+
 
 
         } catch (SQLException throwable) {

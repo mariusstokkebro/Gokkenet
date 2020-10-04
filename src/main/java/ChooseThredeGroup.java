@@ -17,18 +17,19 @@ public class ChooseThredeGroup {
         this.sizeY = sizeY;
         this.threadId = threadId;
 
-        extra = (int) sizeX/4;
-        btnJoin = new AlmindeligKnap(p,(int)(posX + extra +p.textWidth(names)), posY,(int)p.textWidth("Join")+ extra ,sizeY,"Join");
+        extra = (int) sizeX/2;
+        btnJoin = new AlmindeligKnap(p,(int)(posX + extra +p.textWidth(names))+20, posY,(int)p.textWidth("Join")+ sizeX/4 ,sizeY,"Join");
     }
 
     public void drawBtn(){
+        btnJoin.tegnKnap();
         p.fill(200);
-       p.rect(posX,posY , sizeX,sizeY);
+       p.rect(posX,posY ,p.textWidth(names) ,sizeY);
        p.fill(0);
        p.textAlign(p.CORNER,p.CENTER);
-       p.text(names,posX ,posY + (int)(extra/2) , posY);
+       p.text(names,posX ,posY + (int)((sizeX/5)/2) , posY);
         p.textAlign(p.CORNER);
-       btnJoin.tegnKnap();
+
     }
 
     void  click(float mx, float my){
