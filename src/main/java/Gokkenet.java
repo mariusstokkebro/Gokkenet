@@ -1,5 +1,7 @@
 import processing.core.PApplet;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,6 +41,7 @@ public class Gokkenet extends PApplet {
         ms = new MessageSide(this, connection);
         ct = new ChooseThread(this, connection);
         message = new Message(this,100,100,200,50,"Dette er en lang besked jeg skriver for at kunne se det");
+
     }
 
     @Override
@@ -89,6 +92,33 @@ public class Gokkenet extends PApplet {
             ms.click(mouseX, mouseY);
         }
     }
+    public String getHash(String passwordToHash){
+
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        return generatedPassword;
+    }
+
 
     private void login() {
         ls.btnLogin.registrerRelease();
@@ -105,7 +135,7 @@ public class Gokkenet extends PApplet {
                 System.out.println(rsPassword);
                 System.out.println("");
 
-                if (ls.userName.indput.equals(rsUsername) && ls.password.indput.equals(rsPassword)) {
+                if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)) {
                     ls.visible = false;
                     ct.visibale = true;
                     ls.password.klikket = false;
@@ -116,6 +146,8 @@ public class Gokkenet extends PApplet {
                 throwable.printStackTrace();
         }
     }
+
+
 
 
 }
