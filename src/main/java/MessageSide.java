@@ -15,7 +15,7 @@ public class MessageSide {
     private long threadId, userId;
     private Connection connection;
     int y= 100;
-    ArrayList<String> msg = new ArrayList<String>();
+    ArrayList<Message> msg = new ArrayList<Message>();
 
 
     MessageSide(PApplet p, Connection connection){
@@ -39,7 +39,8 @@ public class MessageSide {
            sendMessage(besked.indput);
            btnSendt.registrerRelease();
         }
-        msg.add(new String(""));
+        msg.add(new Message("","",""));
+
 
     }
 
@@ -64,16 +65,16 @@ public class MessageSide {
             while (rsMessages.next()) {
                 for(int j = 0;j < msg.size(); j++){
                     if(!msg.get(j).equals(rsMessages.getString(1))){
-                        msg.add(rsMessages.getString(1));
+                        msg.add(new Message(rsMessages.getString(3),rsMessages.getString(2),rsMessages.getString(1)));
                         System.out.println(msg.get(j));
 
                     }
                 }
                /* System.out.println(rsMessages.getString(1));
                 System.out.println(rsMessages.getString(2));*/
-                p.text(rsMessages.getString(3)+ ": ",p.width/2,y-20 + i *80);
+                /*p.text(rsMessages.getString(3)+ ": ",p.width/2,y-20 + i *80);
                 p.text(rsMessages.getString(1),p.width/2,y + i *80);
-                p.text(rsMessages.getString(2),p.width/2,y + 20 + i *80);
+                p.text(rsMessages.getString(2),p.width/2,y + 20 + i *80);*/
                 i++;
             }
         } catch (SQLException throwable) {

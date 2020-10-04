@@ -40,7 +40,7 @@ public class Gokkenet extends PApplet {
         ls = new LoginSide(this);
         ms = new MessageSide(this, connection);
         ct = new ChooseThread(this, connection);
-        message = new Message(this,100,100,200,50,"Dette er en lang besked jeg skriver for at kunne se det");
+
 
     }
 
