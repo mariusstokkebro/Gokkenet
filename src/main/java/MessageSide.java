@@ -39,7 +39,7 @@ public class MessageSide {
            sendMessage(besked.indput);
            btnSendt.registrerRelease();
         }
-
+        msg.add(new String(""));
 
     }
 
@@ -62,16 +62,15 @@ public class MessageSide {
                     "WHERE threadId = " + threadId + " ORDER BY message.timestamp");
             int i = 0;
             while (rsMessages.next()) {
-                for(int j = 0;j < msg.size(); ++j){
+                for(int j = 0;j < msg.size(); j++){
                     if(!msg.get(j).equals(rsMessages.getString(1))){
-                        y -= 20;
                         msg.add(rsMessages.getString(1));
                         System.out.println(msg.get(j));
 
                     }
                 }
-                System.out.println(rsMessages.getString(1));
-                System.out.println(rsMessages.getString(2));
+               /* System.out.println(rsMessages.getString(1));
+                System.out.println(rsMessages.getString(2));*/
                 p.text(rsMessages.getString(3)+ ": ",p.width/2,y-20 + i *80);
                 p.text(rsMessages.getString(1),p.width/2,y + i *80);
                 p.text(rsMessages.getString(2),p.width/2,y + 20 + i *80);
