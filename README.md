@@ -19,7 +19,9 @@ Disse to brugere skulle have et login der bestod af et Id, brugernavn og passwor
 Processen gik som at vi først skulle lave databasen. Vi ville gerne sætte to accounts op, så vi lavede et account til Casper og en abe der hedder Albert. Casper er dårlig til at lave passwords, så hans password blev Cas123. Albert er en abe der ikke kan benytte sig af teknologi, men hans dyrepassere er heller ikke særligt gode til det med cybersikkerhed, så hans password blev bare Abe123. De fik også ID’er 1 og 2. 
 Vi lavede nu en login feature, så man kunne skrive en kombination af et brugernavn og et password der overensstemte med et entry i databasen, lukkede programmet. Vi havde ikke resten af chatprogrammet, så det var den bedste funktion vi kunne finde på. Vi arbejdede nu også på at man kunne registrere kontoer til databasen, og give dem et unikt ID, og lavede selve chatprogrammet.
 
-de forskellige bruger
+de forskellige bruger:
+
+
 Brugernavn:Casper
 Kodeord:Cas123
 
