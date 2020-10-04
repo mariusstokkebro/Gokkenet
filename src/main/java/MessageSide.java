@@ -14,6 +14,8 @@ public class MessageSide {
     boolean visible = false;
     private long threadId, userId;
     private Connection connection;
+    int y= 100;
+    ArrayList<String> msg = new ArrayList<String>();
 
 
     MessageSide(PApplet p, Connection connection){
@@ -60,12 +62,19 @@ public class MessageSide {
                     "WHERE threadId = " + threadId + " ORDER BY message.timestamp");
             int i = 0;
             while (rsMessages.next()) {
+                for(int j = 0;j < msg.size(); ++j){
+                    if(!msg.get(j).equals(rsMessages.getString(1))){
+                        y -= 20;
+                        msg.add(rsMessages.getString(1));
+                        System.out.println(msg.get(j));
 
+                    }
+                }
                 System.out.println(rsMessages.getString(1));
                 System.out.println(rsMessages.getString(2));
-                p.text(rsMessages.getString(3)+ ": ",p.width/2,80 + i *80);
-                p.text(rsMessages.getString(1),p.width/2,100 + i *80);
-                p.text(rsMessages.getString(2),p.width/2,120 + i *80);
+                p.text(rsMessages.getString(3)+ ": ",p.width/2,y-20 + i *80);
+                p.text(rsMessages.getString(1),p.width/2,y + i *80);
+                p.text(rsMessages.getString(2),p.width/2,y + 20 + i *80);
                 i++;
             }
         } catch (SQLException throwable) {
