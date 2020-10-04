@@ -36,9 +36,10 @@ public class LoginSide {
         if (visible) {
             password.KlikTjek(mx, my);
             userName.KlikTjek(mx, my);
+            btnLogin.registrerRelease();
             /*if(registrer.erKlikket()){
                 registrer.registrerRelease();
-                btnLogin.registrerRelease();
+
             } registrer.registrerKlik(p.mouseX,p.mouseY);*/
             btnLogin.registrerKlik(p.mouseX,p.mouseY);
         }else{

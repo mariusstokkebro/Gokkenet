@@ -88,7 +88,8 @@ public class Gokkenet extends PApplet {
             ls.clik(mouseX, mouseY);
         } else if(ct.visibale) {
             ct.click(mouseX, mouseY);
-        } else if(ms.visible) {
+        }
+        if(ms.visible) {
             ms.click(mouseX, mouseY);
         }
     }
