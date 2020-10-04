@@ -1,5 +1,3 @@
-package resources;
-
 import processing.core.PApplet;
 
 public class Message {

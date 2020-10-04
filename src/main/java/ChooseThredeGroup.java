@@ -34,4 +34,8 @@ public class ChooseThredeGroup {
     void  click(float mx, float my){
         btnJoin.registrerKlik(mx,my);
     }
+
+    long getThreadId(){
+        return threadId;
+    }
 }

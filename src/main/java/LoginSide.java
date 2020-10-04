@@ -21,27 +21,22 @@ public class LoginSide {
             userName.tegnTextFlet();
             registrer.tegnKnap();
             btnLogin.tegnKnap();
-
         }
-        p.println(visible);
     }
-
 
     void typede(char key) {
         if (visible) {
             password.keyindput(key);
             userName.keyindput(key);
         }
+        p.println();
     }
 
-    void clik(float mx, float my){
-
-
+    void clik(float mx, float my) {
         if (visible) {
             password.KlikTjek(mx, my);
             userName.KlikTjek(mx, my);
             if(registrer.erKlikket()){
-
                 registrer.registrerRelease();
                 btnLogin.registrerRelease();
             } registrer.registrerKlik(p.mouseX,p.mouseY);

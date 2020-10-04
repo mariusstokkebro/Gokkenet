@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import resources.Message;
 
 import java.sql.*;
 import java.sql.Connection;
@@ -7,18 +6,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Gokkenet extends PApplet {
-
-    public static void main(String[] args) {
-        PApplet.main("Gokkenet");
-    }
     MessageSide ms;
     LoginSide ls;
     ChooseThread ct;
     Message message;
+    long userId;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
-    boolean k = true;
     private Connection connection = null;
+
+    public static void main(String[] args) {
+        PApplet.main("Gokkenet");
+    }
 
     public Gokkenet() {
         try {
@@ -26,7 +25,7 @@ public class Gokkenet extends PApplet {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        println("connected to MS Access database. ");
+        println("Connected to MS Access database. ");
     }
 
     @Override
@@ -37,26 +36,33 @@ public class Gokkenet extends PApplet {
     @Override
     public void setup() {
         ls = new LoginSide(this);
-        ms = new MessageSide(this);
+        ms = new MessageSide(this, connection);
         ct = new ChooseThread(this, connection);
         message = new Message(this,100,100,200,50,"Dette er en lang besked jeg skriver for at kunne se det");
     }
 
     @Override
     public void draw() {
+
         clear();
         background(200);
+        ms.visible = ct.chatVisible;
         ls.drawSide();
 
-
-        if (ls.btnLogin.klikket == true)
+        if (ls.visible && ls.btnLogin.klikket == true)
             login();
-
-        if(ls.visible == false && ct.visibale){
+        if (ct.visibale)
             ct.drawCT();
-        }
-        if(ls.visible == false && ct.visibale == false){
+        if (ms.visible) {
             ms.drawMessage();
+            ms.updateMessages();
+            if (frameCount % 100 == 0) {
+                long threadId = ct.thredeGroupsList.get(ct.getThreadid()).getThreadId();
+
+                ms.setThreadId(threadId);
+                ms.setUserId(userId);
+
+            }
         }
 
     }
@@ -65,7 +71,6 @@ public class Gokkenet extends PApplet {
     public void keyTyped() {
         if(ls.visible){
             ls.typede(key);
-
         }
 
         if(ls.visible == false && ct.visibale == false){
@@ -76,15 +81,13 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void mouseClicked() {
-        if(ls.visible){
-            ls.clik(mouseX,mouseY);
-        } else if(ct.visibale){
-            ct.click(mouseX,mouseY);
-        } else if(ls.visible == false && ct.visibale == false){
-            ms.click(mouseX,mouseY);
+        if (ls.visible) {
+            ls.clik(mouseX, mouseY);
+        } else if(ct.visibale) {
+            ct.click(mouseX, mouseY);
+        } else if(ms.visible) {
+            ms.click(mouseX, mouseY);
         }
-
-
     }
 
     private void login() {
@@ -92,7 +95,7 @@ public class Gokkenet extends PApplet {
         Statement s = null;
         try {
             s = connection.createStatement();
-            ResultSet rsUser = s.executeQuery("SELECT [username],[password] FROM [user]");
+            ResultSet rsUser = s.executeQuery("SELECT [username],[password], [userID] FROM [user]");
 
             while (rsUser.next()) {
                 String rsUsername = rsUser.getString(1);
@@ -105,12 +108,14 @@ public class Gokkenet extends PApplet {
                 if (ls.userName.indput.equals(rsUsername) && ls.password.indput.equals(rsPassword)) {
                     ls.visible = false;
                     ct.visibale = true;
-                    //break;
                     ls.password.klikket = false;
+                    userId = rsUser.getLong(3);
                 }
             }
         } catch (SQLException throwable) {
                 throwable.printStackTrace();
         }
     }
+
+
 }

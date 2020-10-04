@@ -10,6 +10,8 @@ public class ChooseThread {
     PApplet p;
     ArrayList<ChooseThredeGroup> thredeGroupsList = new ArrayList<ChooseThredeGroup>();
     AlmindeligKnap btnAddThread;
+    int threadid;
+    boolean chatVisible = false;
 
     boolean visibale = false;
 
@@ -64,8 +66,18 @@ public class ChooseThread {
             t.click(mx, my);
             if(t.btnJoin.klikket){
                 visibale = false;
+                threadid = i;
+                chatVisible = true;
+
             }
         }
+    }
+
+    boolean getchatVisbale(){
+        return chatVisible;
+    }
+    int getThreadid(){
+        return threadid;
     }
 
 }
