@@ -1,3 +1,4 @@
+import org.w3c.dom.Text;
 import processing.core.PApplet;
 
 import java.sql.Connection;
@@ -5,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MessageSide {
     PApplet p;
@@ -15,7 +19,10 @@ public class MessageSide {
     private long threadId, userId;
     private Connection connection;
     int y = 100;
-    ArrayList<Message> msgListe = new ArrayList<Message>();
+    int maxIdx= 0,minIdx = 1;
+    Long[] cand = new Long[]{0L, 0L, 0L};
+    //ArrayList<Message> msgListe = new ArrayList<Message>();
+    Map<Long, Message> msgMap = new HashMap<Long, Message>();
 
 
     MessageSide(PApplet p, Connection connection) {
@@ -41,9 +48,22 @@ public class MessageSide {
             sendMessage(besked.indput);
             btnSendt.registrerRelease();
         }
-        msgListe.add(new Message("", "", ""));
 
+        String firstMsg = msgMap.get(cand[minIdx]) != null
+                ? msgMap.get(cand[minIdx]).getMsg()
+                : ":";
 
+        String lastMsg = msgMap.get(cand[maxIdx]) != null
+                ? msgMap.get(cand[maxIdx]).getMsg()
+                :":";
+
+        String midtMsg = msgMap.get(cand[3-maxIdx-minIdx]) != null
+                ? msgMap.get(cand[3-maxIdx-minIdx]).getMsg()
+                :":";
+
+        p.text(firstMsg,p.width/4,20);
+        p.text(midtMsg,p.width/4,100);
+        p.text(lastMsg,p.width/4,180);
     }
 
     public void writeM(char key) {
@@ -62,18 +82,35 @@ public class MessageSide {
                     "FROM thread INNER JOIN message ON thread.threadId = message.threadId " +
                     "INNER JOIN user ON message.userId = user.userID " +
                     "WHERE threadId = " + threadId + " ORDER BY message.timestamp");
-            int i = 0;
+
+            msgMap.clear();
             while (rsMessages.next()) {
+                String msg = rsMessages.getString(1);
+                Date date = rsMessages.getTimestamp(2);
+                String name = rsMessages.getString(3);
+                Message message = new Message(name, date.toString(), msg);
 
-
-                p.text(rsMessages.getString(3) + ": ", p.width / 2, y - 20 + i * 80);
-                p.text(rsMessages.getString(1), p.width / 2, y + i * 80);
-                p.text(rsMessages.getString(2), p.width / 2, y + 20 + i * 80);
-                i++;
-
-
+                msgMap.put(date.getTime(), message);
             }
 
+            cand = new Long[]{0L, 0L, 0L};
+            maxIdx= 0;
+            minIdx = 1;
+
+            for(Long key : msgMap.keySet()) {
+                for (int i = 0; i < cand.length; ++i) {
+                    if (cand[i] > cand[maxIdx])
+                        maxIdx = i;
+                    if (cand[i] < cand[minIdx])
+                        minIdx = i;
+                }
+
+                if (key > cand[minIdx]) {
+                    cand[minIdx] = key;
+                }
+            }
+
+            System.out.println("" + cand[0] + " - " + cand[1] + " - " + cand[2]);
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -81,7 +118,7 @@ public class MessageSide {
     }
 
     public void sendMessage(String msg) {
-        msgListe.add(new Message("a","111",msg));
+
         try {
             String sql = "INSERT INTO message (userId, threadId, message) VALUES (" + userId + "," + threadId + ",'" + msg + "')";
             Statement statement = connection.createStatement();
